@@ -1,38 +1,25 @@
-# Riznica riječi
+# Bosanski korak po korak
 
-**Rječnik, vježbe, gramatika i testovi za dopunsku školu bosanskog jezika.**
+**Rječnik, gramatika, vježbe i testovi bosanskog jezika — od A1 do B2, kroz 8 razreda dopunske škole.**
 
-Interaktivni, pretraživi rječnik za svih **8 razreda** i **6 predmeta** dopunske
-škole bosanskog jezika u dijaspori. Napravljen kao **jedan samostalan fajl** —
-radi bez servera, baze podataka i (nakon prvog učitavanja) bez interneta.
+Sadržaj: Amila Guhdija. Statička, samostalna verzija — sav sadržaj je ugrađen, ne treba server ni baza.
 
 ## Šta sadrži
 
 | Sekcija | Opis |
 |---|---|
-| **Kartoteka** | Pretraživi rječnik (~2.000+ riječi) razvrstan po predmetu, razredu i nastavnoj cjelini. Riječ dana. |
-| **Vježbe riječi** | Kartice (flashcards), kviz izbora i uparivanje pojmova, po razredu i predmetu. |
-| **Gramatika i pravopis** | Pravila bosanskog jezika (fonetika, morfologija, sintaksa, pravopis, leksika) s vježbom uz svaku cjelinu. |
-| **Testovi** | Do 50 pitanja po testu, u više formata (izbor, tačno/netačno, dopuni) — po predmetu, razredu ili gramatičkoj temi. |
-| **Dodaj riječ** | Nastavnici mogu dodati nove riječi i preuzeti ažuriranu stranicu (.html) ili samo nove riječi (.csv). |
-
-## Kako se koristi
-
-Otvori `index.html` u bilo kojem modernom pregledniku (Chrome, Edge, Safari,
-Firefox). Ništa se ne instalira. Može se dijeliti kao fajl, staviti na sajt
-škole ili u dijeljeni folder.
+| **Rječnik** | 5.079 riječi i izraza s prijevodom, primjerom rečenice, vrstom riječi, predmetom, razredom i CEFR nivoom. Pretraga radi i bez kvačica (npr. "kuca" pronalazi "kuća"). |
+| **Gramatika** | 128 lekcija u 64 oblasti, od slova i glasova (1. razred, A1.1) do B2 argumentacije (8. razred), svaka s objašnjenjem, primjerima i kvizom. |
+| **Vježbe i testovi** | Po razredu: 8 oblastnih testova po 20 pitanja + završni test od 40 pitanja. Rezultati se pamte u pregledniku. |
+| **Vježbanje riječi** | Kartice za vježbanje vokabulara po razredu i nivou. |
 
 ## Tehnički detalji
 
-- Čisti HTML/CSS/JavaScript, **bez ijedne biblioteke** (osim Google Fonts za tipografiju).
-- Sav sadržaj (riječi, gramatika, pitanja) živi u samom fajlu.
-- Kodiranje: UTF-8 (svi bosanski znakovi č, ć, š, ž, đ ispravni).
-- Dizajn: "kartoteka" estetika — Fraunces + Karla + IBM Plex Mono.
+- `index.html` — kompletna aplikacija (HTML/CSS/JS, bez biblioteka)
+- `data.js` — svih 5.079 riječi + gramatika + sadržaj, ugrađeno kao JSON
+- Mrežni sloj originala (API pozivi) zamijenjen lokalnim slojem koji čita ugrađene podatke — aplikacija radi bez interneta nakon prvog učitavanja
+- Kodiranje UTF-8, jezik `bs`
 
 ## Deploy
 
-Statička stranica. Hostuje se na Vercelu (auto-deploy iz `main` grane).
-
----
-
-*Dio Bosanske škole / Bozmaps.*
+Statička stranica na Vercelu — auto-deploy iz `main` grane.
