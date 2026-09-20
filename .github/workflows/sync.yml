@@ -1,0 +1,46 @@
+name: Sync content
+
+# Pulls the latest words, grammar and theme from the authoring site and commits
+# them. Vercel auto-deploys on push, so Amila's edits reach the live site on
+# their own. If the pull fails or looks incomplete the job stops and the
+# committed data.js is left exactly as it was.
+
+on:
+  schedule:
+    # 04:10 UTC nightly. Cron has no timezone, so this drifts an hour with BST.
+    - cron: "10 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-content
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Pull latest content
+        run: node scripts/sync.mjs
+
+      - name: Commit if changed
+        run: |
+          if [ -z "$(git status --porcelain data.js)" ]; then
+            echo "No content changes."
+            exit 0
+          fi
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.js
+          git commit -m "Sync content from authoring site"
+          git push
+          echo "Pushed updated content. Vercel will redeploy."

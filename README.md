@@ -23,3 +23,26 @@ Sadržaj: Amila Guhdija. Statička, samostalna verzija — sav sadržaj je ugra�
 ## Deploy
 
 Statička stranica na Vercelu — auto-deploy iz `main` grane.
+
+## Ažuriranje sadržaja
+
+Sadržaj se uređuje na izvornoj stranici, a ovdje se povlači automatski.
+
+```bash
+node scripts/sync.mjs        # povuci i upiši data.js
+node scripts/sync.mjs --dry  # samo provjeri, bez upisa
+```
+
+GitHub Action `.github/workflows/sync.yml` radi isto svake noći (04:10 UTC), a
+može se pokrenuti i ručno preko **Actions → Sync content → Run workflow**. Ako
+se sadržaj promijenio, commita `data.js` i Vercel automatski objavi izmjene.
+
+Skripta upisuje `data.js` samo ako je preuzimanje potpuno i ispravno (svih 8
+razreda, najmanje 4.800 riječi i 120 lekcija). Ako izvor padne ili vrati
+nepotpune podatke, posao staje i postojeći `data.js` ostaje netaknut.
+
+Drugi izvor se zadaje kroz `SYNC_SOURCE`:
+
+```bash
+SYNC_SOURCE="https://primjer.com" node scripts/sync.mjs
+```
